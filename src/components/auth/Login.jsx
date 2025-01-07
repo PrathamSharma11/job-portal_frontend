@@ -11,6 +11,7 @@ import { toast } from 'sonner'
 import { useDispatch, useSelector } from 'react-redux'
 import { setLoading,setUser } from '@/redux/authSlice'
 import { Loader2 } from 'lucide-react'
+import { useEffect } from 'react'
 
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
         password:'',
         role:''
     })
-    const {loading} = useSelector(store=>store.auth);
+    const {loading,user} = useSelector(store=>store.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch()
 ;    const changeEventHandler = (e)=>{
@@ -49,6 +50,12 @@ const Login = () => {
             dispatch(setLoading(false));
         }
     }
+    useEffect(()=>{
+         if(user){
+            navigate("/");
+         }
+    },[])
+
    
     return (
         <div>

@@ -4,7 +4,7 @@ import { Input } from '../ui/input'
 import { RadioGroup } from '../ui/radio-group'
 import { Link,useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import { USER_API_END_POINT } from '../utils/constant'
 import { toast } from 'sonner'
 import axios from 'axios';
@@ -22,7 +22,7 @@ const Signup = () => {
              role:"",
              file:""
           });
-          const {loading} = useSelector(store=>store.auth)
+          const {loading,user} = useSelector(store=>store.auth)
           const dispatch = useDispatch()
           const navigate = useNavigate();
           const changeEventHandler = (e)=>{
@@ -66,6 +66,11 @@ const Signup = () => {
             
         
           }
+          useEffect(()=>{
+            if(user){
+               navigate("/");
+            }
+       },[])
    
     return (
         <div>
